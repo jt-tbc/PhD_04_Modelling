@@ -1,0 +1,54 @@
+---
+title: "01_Video_Tow_Data_Prep"
+author: "Joe Turner"
+date: "20 September 2017"
+output: pdf_document
+---
+
+```{r setup}
+
+# 1) Set working directory and load packages
+
+setwd("C:/OneDrive/C4_Model/Video_Data/Data_Files")
+
+library(plyr)
+library(vegan)
+library(doBy)
+library(rgdal)
+library(clustsig)
+library(gdata)
+library(ggplot2)
+library(scales)
+library(ggrepel)
+library(RColorBrewer)
+library(reshape2)
+library(reshape)
+library(grid)
+library(dplR)
+library(gridExtra)
+library(ecodist)
+library(pvclust)
+library(mclust)
+library(factoextra)
+library(NbClust)
+library(cluster)
+library(data.table)
+st.err <- function(x) {sd(x)/sqrt(length(x))}
+
+
+#2) Make an automatic list of all files present in the directory
+file_list<-list.files()
+
+#3) Combine all the files into a list where each layer contains only the data
+dataset <- lapply(file_list, read.csv, header=T)
+
+#4) Combine the data into a single dataframe
+alldata<-do.call(rbind.fill,dataset)
+
+#5) Export data file
+setwd("C:/OneDrive/C4_Model/Video_Data/")
+write.csv(alldata, "01_COMBINED_Towed_Video_Data_RAW.csv")
+
+
+```
+
